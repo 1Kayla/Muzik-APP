@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MUZIKModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBLMUZIK">
+          <Key>
+            <PropertyRef Name="MUZIKID" />
+          </Key>
+          <Property Name="MUZIKID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SARKIADI" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ARTIST" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ALBUMADI" Type="nvarchar" MaxLength="30" />
+          <Property Name="SARKISURESI" Type="nvarchar" MaxLength="30" />
+          <Property Name="CIKISYILI" Type="int" />
+          <Property Name="TUR" Type="int" />
+        </EntityType>
+        <EntityType Name="TBLTUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TURAD" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_TBLMUZIK_TBLTUR">
+          <End Role="TBLTUR" Type="Self.TBLTUR" Multiplicity="0..1" />
+          <End Role="TBLMUZIK" Type="Self.TBLMUZIK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLTUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLMUZIK">
+              <PropertyRef Name="TUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MUZIKModelStoreContainer">
+          <EntitySet Name="TBLMUZIK" EntityType="Self.TBLMUZIK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBLTUR" EntityType="Self.TBLTUR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBLMUZIK_TBLTUR" Association="Self.FK_TBLMUZIK_TBLTUR">
+            <End Role="TBLTUR" EntitySet="TBLTUR" />
+            <End Role="TBLMUZIK" EntitySet="TBLMUZIK" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MUZIKModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBLMUZIK">
+          <Key>
+            <PropertyRef Name="MUZIKID" />
+          </Key>
+          <Property Name="MUZIKID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SARKIADI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ARTIST" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ALBUMADI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SARKISURESI" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CIKISYILI" Type="Int32" />
+          <Property Name="TUR" Type="Int32" />
+          <NavigationProperty Name="TBLTUR" Relationship="Self.FK_TBLMUZIK_TBLTUR" FromRole="TBLMUZIK" ToRole="TBLTUR" />
+        </EntityType>
+        <EntityType Name="TBLTUR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TURAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBLMUZIK" Relationship="Self.FK_TBLMUZIK_TBLTUR" FromRole="TBLTUR" ToRole="TBLMUZIK" />
+        </EntityType>
+        <Association Name="FK_TBLMUZIK_TBLTUR">
+          <End Role="TBLTUR" Type="Self.TBLTUR" Multiplicity="0..1" />
+          <End Role="TBLMUZIK" Type="Self.TBLMUZIK" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBLTUR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TBLMUZIK">
+              <PropertyRef Name="TUR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MUZIKEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBLMUZIK" EntityType="Self.TBLMUZIK" />
+          <EntitySet Name="TBLTUR" EntityType="Self.TBLTUR" />
+          <AssociationSet Name="FK_TBLMUZIK_TBLTUR" Association="Self.FK_TBLMUZIK_TBLTUR">
+            <End Role="TBLTUR" EntitySet="TBLTUR" />
+            <End Role="TBLMUZIK" EntitySet="TBLMUZIK" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MUZIKModelStoreContainer" CdmEntityContainer="MUZIKEntities">
+          <EntitySetMapping Name="TBLMUZIK">
+            <EntityTypeMapping TypeName="MUZIKModel.TBLMUZIK">
+              <MappingFragment StoreEntitySet="TBLMUZIK">
+                <ScalarProperty Name="MUZIKID" ColumnName="MUZIKID" />
+                <ScalarProperty Name="SARKIADI" ColumnName="SARKIADI" />
+                <ScalarProperty Name="ARTIST" ColumnName="ARTIST" />
+                <ScalarProperty Name="ALBUMADI" ColumnName="ALBUMADI" />
+                <ScalarProperty Name="SARKISURESI" ColumnName="SARKISURESI" />
+                <ScalarProperty Name="CIKISYILI" ColumnName="CIKISYILI" />
+                <ScalarProperty Name="TUR" ColumnName="TUR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBLTUR">
+            <EntityTypeMapping TypeName="MUZIKModel.TBLTUR">
+              <MappingFragment StoreEntitySet="TBLTUR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TURAD" ColumnName="TURAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,36 @@
+﻿@model Muzik_App.Models.TBLMUZIK
+@{
+    ViewBag.Title = "MuzikGetir";
+    Layout = "~/Views/Shared/_MuzikLayout.cshtml";
+}
+
+@using (Html.BeginForm("MuzikGuncelle", "Muzik", FormMethod.Post))
+{
+    <div style="margin-bottom:15px">
+        @Html.HiddenFor(y => y.MUZIKID)
+        @Html.LabelFor(x => x.SARKIADI)
+        @Html.TextBoxFor(x => x.SARKIADI, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.ARTIST)
+        @Html.TextBoxFor(x => x.ARTIST, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.ALBUMADI)
+        @Html.TextBoxFor(x => x.ALBUMADI, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.SARKISURESI)
+        @Html.TextBoxFor(x => x.SARKISURESI, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.CIKISYILI)
+        @Html.TextBoxFor(x => x.CIKISYILI, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.TUR)
+        @Html.TextBoxFor(x => x.TUR, new { @class = "form-control" })
+    </div>
+    <button class="btn btn-success">Güncelle</button>
+}
+

@@ -1,0 +1,38 @@
+﻿@using Muzik_App.Models;
+@model List<TBLMUZIK>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MuzikLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Şarkı İsmi</th>
+        <th>Artist</th>
+        <th>Albüm İsmi</th>
+        <th>Şarkı Süresi</th>
+        <th>Çıkış Yılı</th>
+        <th>Türü</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach(var x in Model)
+            {
+                <tr>
+                    <td>@x.MUZIKID</td>
+                    <td>@x.SARKIADI</td>
+                    <td>@x.ARTIST</td>
+                    <td>@x.ALBUMADI</td>
+                    <td>@x.SARKISURESI</td>
+                    <td>@x.CIKISYILI</td>
+                    <td>@x.TBLTUR.TURAD</td>
+                    <td><a href="/Muzik/MuzikSil/@x.MUZIKID" class="btn btn-danger">Sil</a></td>
+                    <td><a href="/Muzik/MuzikGetir/@x.MUZIKID" class="btn btn-warning">Güncelle</a></td>
+                    
+
+                </tr>
+            }
+</table>
+<a href="/Muzik/MuzikEkle/" class="btn btn-primary">Müzik Ekle</a>
+
